@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Health Report Form</title>
+  <style>
+    .container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+        font-size: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #555;
+        font-size: 16px;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .submit-btn {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        .alert {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .alert-success {
+    background-color: #dff0d8;
+    color: #3c763d;
+  }
+  
+  .alert-error {
+    background-color: #f2dede;
+    color: #a94442;
+  }
+  
+  /* Additional Styling */
+  
+  body {
+    background-color: #f9f9f9;
+  }
+  
+  .container {
+    margin-top: 50px;
+    background-color: #ffffff; /* Updated container background color */
+  }
+  
+  .form-group input[type="file"] {
+    border: none;
+    background-color: transparent;
+  }
+  
+  .submit-btn {
+    margin-top: 20px;
+    background-color: #4CAF50; /* Updated submit button background color */
+  }
+  
+  .alert {
+    display: none;
+    background-color: #f5f5f5; /* Updated alert background color */
+  }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Health Report Form</h2>
+    <form id="healthReportForm" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+      </div>
+      <div class="form-group">
+        <label for="weight">Weight:</label>
+        <input type="number" id="weight" name="weight" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email ID:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="healthReport">Upload Health Report:</label>
+        <input type="file" id="healthReport" name="healthReport" required accept=".pdf">
+      </div>
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('healthReportForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Create FormData object to store form data
+      var formData = new FormData(this);
+
+      // Send form data to server using AJAX
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'insert.php', true);
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          alert('Form submitted successfully!');
+          document.getElementById('healthReportForm').reset();
+        } else {
+          alert('Form submission failed. Please try again.');
+        }
+      };
+      xhr.send(formData);
+    });
+  </script>
+</body>
+</html>
+
+<script>
+    document.getElementById('healthReportForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
+  
+      // Create FormData object to store form data
+      var formData = new FormData(this);
+  
+      // Send form data to server using AJAX
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'insert.php', true);
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          document.getElementById('message').innerHTML = 'Form submitted successfully!';
+          document.getElementById('message').className = 'alert alert-success';
+          document.getElementById('healthReportForm').reset();
+        } else {
+          document.getElementById('message').innerHTML = 'Form submission failed. Please try again.';
+          document.getElementById('message').className = 'alert alert-error';
+        }
+        document.getElementById('message').style.display = 'block';
+      };
+      xhr.send(formData);
+    });
+  </script>
+  </body>
+  </html>
+  
